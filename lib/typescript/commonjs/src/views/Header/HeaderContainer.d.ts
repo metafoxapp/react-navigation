@@ -1,0 +1,21 @@
+import { type Route } from '@react-navigation/native';
+import { Animated, type StyleProp, type ViewStyle } from 'react-native';
+import type { Layout, Scene, StackHeaderMode } from '../../types';
+export type Props = {
+    mode: StackHeaderMode;
+    layout: Layout;
+    scenes: (Scene | undefined)[];
+    getPreviousScene: (props: {
+        route: Route<string>;
+    }) => Scene | undefined;
+    getFocusedRoute: () => Route<string>;
+    onContentHeightChange?: (props: {
+        route: Route<string>;
+        height: number;
+    }) => void;
+    style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+    scene: Scene | undefined;
+    isModal?: boolean;
+};
+export declare function HeaderContainer({ mode, scenes, layout, getPreviousScene, getFocusedRoute, onContentHeightChange, style, }: Props): import("react/jsx-runtime").JSX.Element;
+//# sourceMappingURL=HeaderContainer.d.ts.map

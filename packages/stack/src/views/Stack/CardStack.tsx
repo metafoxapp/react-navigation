@@ -728,8 +728,8 @@ export class CardStack extends React.Component<Props, State> {
             const safeAreaInsetBottom = insets.bottom;
             const safeAreaInsetLeft = insets.left;
 
-            const headerHeight =
-              headerShown !== false ? headerHeights[route.key] : 0;
+            const headerHeight = 0;
+            // headerShown !== false ? headerHeights[route.key] : 0;
 
             // Start from current card and count backwards the number of cards with same interpolation
             const interpolationIndex = getInterpolationIndex(scenes, index);
@@ -758,7 +758,7 @@ export class CardStack extends React.Component<Props, State> {
                 homeIndicatorHidden={autoHideHomeIndicator}
                 pointerEvents="box-none"
               >
-                <React.Fragment key="header">
+                {/* <React.Fragment key="header">
                   {renderHeader({
                     mode: 'float',
                     layout,
@@ -775,7 +775,7 @@ export class CardStack extends React.Component<Props, State> {
                       ],
                     ],
                   })}
-                </React.Fragment>
+                </React.Fragment> */}
                 <CardContainer
                   index={index}
                   interpolationIndex={interpolationIndex}

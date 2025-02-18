@@ -297,17 +297,17 @@ function CardContainerInner({
     >
       <View style={styles.container}>
         <ModalPresentationContext.Provider value={modal}>
-          {headerMode !== 'float'
-            ? renderHeader({
-                mode: 'screen',
-                layout,
-                scenes: [previousScene, scene],
-                getPreviousScene,
-                getFocusedRoute,
-                onContentHeightChange: onHeaderHeightChange,
-                style: styles.header,
-              })
-            : null}
+          {renderHeader({
+            mode: 'screen',
+            layout,
+            getPreviousScene,
+            getFocusedRoute,
+            onContentHeightChange: onHeaderHeightChange,
+            style: styles.header,
+            scenes: [],
+            scene,
+            isModal: modal,
+          })}
           <View style={styles.scene}>
             <HeaderBackContext.Provider value={headerBack}>
               <HeaderShownContext.Provider

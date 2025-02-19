@@ -586,10 +586,10 @@ export class CardStack extends React.Component<Props, State> {
         Platform.OS === 'ios',
     } = this.props;
 
-    const { scenes, layout, gestures, headerHeights } = this.state;
+    const { scenes, layout, gestures } = this.state;
 
     const focusedRoute = state.routes[state.index];
-    const focusedHeaderHeight = headerHeights[focusedRoute.key];
+    // const focusedHeaderHeight = headerHeights[focusedRoute.key];
 
     const isFloatHeaderAbsolute = this.state.scenes.slice(-2).some((scene) => {
       const options = scene.descriptor.options ?? {};
@@ -717,7 +717,7 @@ export class CardStack extends React.Component<Props, State> {
             }
 
             const {
-              headerShown = true,
+              // headerShown = true,
               headerTransparent,
               freezeOnBlur,
               autoHideHomeIndicator,

@@ -1,4 +1,4 @@
-import { Animated, Platform } from 'react-native';
+import { Animated } from 'react-native';
 
 import type {
   StackCardInterpolatedStyle,
@@ -111,15 +111,7 @@ export function forModalPresentationIOS({
   layouts: { screen },
   insets,
 }: StackCardInterpolationProps): StackCardInterpolatedStyle {
-  const hasNotchIos =
-    Platform.OS === 'ios' &&
-    !Platform.isPad &&
-    !Platform.isTV &&
-    insets.top > 20;
-  const isLandscape = screen.width > screen.height;
-  const topOffset = isLandscape ? 0 : 10;
-  const statusBarHeight = insets.top;
-  const aspectRatio = screen.height / screen.width;
+  console.log('index---', index, insets);
 
   const progress = add(
     current.progress.interpolate({
@@ -136,16 +128,10 @@ export function forModalPresentationIOS({
       : 0
   );
 
-  const isFirst = index === 0;
-
   const translateY = multiply(
     progress.interpolate({
       inputRange: [0, 1, 2],
-      outputRange: [
-        screen.height,
-        isFirst ? 0 : topOffset,
-        (isFirst ? statusBarHeight : 0) - topOffset * aspectRatio,
-      ],
+      outputRange: [screen.height, 0, 0],
     }),
     inverted
   );
@@ -155,37 +141,13 @@ export function forModalPresentationIOS({
     outputRange: [0, 0.3, 1, 1],
   });
 
-  const scale = isLandscape
-    ? 1
-    : progress.interpolate({
-        inputRange: [0, 1, 2],
-        outputRange: [
-          1,
-          1,
-          screen.width ? 1 - (topOffset * 2) / screen.width : 1,
-        ],
-      });
-
-  const borderRadius = isLandscape
-    ? 0
-    : isFirst
-      ? progress.interpolate({
-          inputRange: [0, 1, 1.0001, 2],
-          outputRange: [0, 0, hasNotchIos ? 38 : 0, 10],
-        })
-      : 10;
+  const scale = 1;
 
   return {
     cardStyle: {
       overflow: 'hidden',
-      borderTopLeftRadius: borderRadius,
-      borderTopRightRadius: borderRadius,
-      // We don't need these for the animation
-      // But different border radius for corners improves animation perf
-      borderBottomLeftRadius: hasNotchIos ? borderRadius : 0,
-      borderBottomRightRadius: hasNotchIos ? borderRadius : 0,
-      marginTop: isFirst ? 0 : statusBarHeight,
-      marginBottom: isFirst ? 0 : topOffset,
+      marginTop: 0,
+      marginBottom: 0,
       transform: [{ translateY }, { scale }],
     },
     overlayStyle: { opacity: overlayOpacity },

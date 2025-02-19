@@ -41,6 +41,8 @@ export type Props = {
     height: number;
   }) => void;
   style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+  scene: Scene | undefined;
+  isModal?: boolean;
 };
 
 export function HeaderContainer({

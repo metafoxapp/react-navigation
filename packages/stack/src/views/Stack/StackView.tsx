@@ -38,6 +38,7 @@ type Props = StackNavigationConfig & {
     route: RouteProp<ParamListBase>,
     placeholder: boolean
   ) => StackDescriptor;
+  renderHeader?: (props: HeaderContainerProps) => React.ReactNode;
 };
 
 type State = {
@@ -307,7 +308,11 @@ export class StackView extends React.Component<Props, State> {
   };
 
   private renderHeader = (props: HeaderContainerProps) => {
-    return <HeaderContainer {...props} />;
+    if (this.props.renderHeader) {
+      return this.props.renderHeader(props);
+    } else {
+      return <HeaderContainer {...props} />;
+    }
   };
 
   private handleOpenRoute = ({ route }: { route: Route<string> }) => {

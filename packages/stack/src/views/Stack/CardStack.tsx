@@ -586,10 +586,10 @@ export class CardStack extends React.Component<Props, State> {
         Platform.OS === 'ios',
     } = this.props;
 
-    const { scenes, layout, gestures, headerHeights } = this.state;
+    const { scenes, layout, gestures } = this.state;
 
     const focusedRoute = state.routes[state.index];
-    const focusedHeaderHeight = headerHeights[focusedRoute.key];
+    // const focusedHeaderHeight = headerHeights[focusedRoute.key];
 
     const isFloatHeaderAbsolute = this.state.scenes.slice(-2).some((scene) => {
       const options = scene.descriptor.options ?? {};
@@ -639,30 +639,30 @@ export class CardStack extends React.Component<Props, State> {
       }
     }
 
-    const floatingHeader = (
-      <React.Fragment key="header">
-        {renderHeader({
-          mode: 'float',
-          layout,
-          scenes,
-          getPreviousScene: this.getPreviousScene,
-          getFocusedRoute: this.getFocusedRoute,
-          onContentHeightChange: this.handleHeaderLayout,
-          style: [
-            styles.floating,
-            isFloatHeaderAbsolute && [
-              // Without this, the header buttons won't be touchable on Android when headerTransparent: true
-              { height: focusedHeaderHeight },
-              styles.absolute,
-            ],
-          ],
-        })}
-      </React.Fragment>
-    );
+    // const floatingHeader = (
+    //   <React.Fragment key="header">
+    //     {renderHeader({
+    //       mode: 'float',
+    //       layout,
+    //       scenes,
+    //       getPreviousScene: this.getPreviousScene,
+    //       getFocusedRoute: this.getFocusedRoute,
+    //       onContentHeightChange: this.handleHeaderLayout,
+    //       style: [
+    //         styles.floating,
+    //         isFloatHeaderAbsolute && [
+    //           // Without this, the header buttons won't be touchable on Android when headerTransparent: true
+    //           { height: focusedHeaderHeight },
+    //           styles.absolute,
+    //         ],
+    //       ],
+    //     })}
+    //   </React.Fragment>
+    // );
 
     return (
       <View style={styles.container}>
-        {isFloatHeaderAbsolute ? null : floatingHeader}
+        {/* {isFloatHeaderAbsolute ? null : floatingHeader} */}
         <MaybeScreenContainer
           enabled={detachInactiveScreens}
           style={styles.container}
@@ -717,7 +717,7 @@ export class CardStack extends React.Component<Props, State> {
             }
 
             const {
-              headerShown = true,
+              // headerShown = true,
               headerTransparent,
               freezeOnBlur,
               autoHideHomeIndicator,
@@ -728,8 +728,8 @@ export class CardStack extends React.Component<Props, State> {
             const safeAreaInsetBottom = insets.bottom;
             const safeAreaInsetLeft = insets.left;
 
-            const headerHeight =
-              headerShown !== false ? headerHeights[route.key] : 0;
+            const headerHeight = 0;
+            // headerShown !== false ? headerHeights[route.key] : 0;
 
             // Start from current card and count backwards the number of cards with same interpolation
             const interpolationIndex = getInterpolationIndex(scenes, index);
@@ -758,6 +758,24 @@ export class CardStack extends React.Component<Props, State> {
                 homeIndicatorHidden={autoHideHomeIndicator}
                 pointerEvents="box-none"
               >
+                {/* <React.Fragment key="header">
+                  {renderHeader({
+                    mode: 'float',
+                    layout,
+                    scenes,
+                    getPreviousScene: this.getPreviousScene,
+                    getFocusedRoute: this.getFocusedRoute,
+                    onContentHeightChange: this.handleHeaderLayout,
+                    style: [
+                      styles.floating,
+                      isFloatHeaderAbsolute && [
+                        // Without this, the header buttons won't be touchable on Android when headerTransparent: true
+                        { height: focusedHeaderHeight },
+                        styles.absolute,
+                      ],
+                    ],
+                  })}
+                </React.Fragment> */}
                 <CardContainer
                   index={index}
                   interpolationIndex={interpolationIndex}
@@ -797,7 +815,7 @@ export class CardStack extends React.Component<Props, State> {
             );
           })}
         </MaybeScreenContainer>
-        {isFloatHeaderAbsolute ? floatingHeader : null}
+        {/* {isFloatHeaderAbsolute ? floatingHeader : null} */}
       </View>
     );
   }

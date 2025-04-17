@@ -104,14 +104,14 @@ export function forVerticalIOS({
  * Standard iOS-style modal animation in iOS 13.
  */
 export function forModalPresentationIOS({
-  index,
+  // index,
   current,
   next,
   inverted,
   layouts: { screen },
-  insets,
+  // insets,
 }: StackCardInterpolationProps): StackCardInterpolatedStyle {
-  console.log('index---', index, insets);
+  // console.log('index---', index, insets);
 
   const progress = add(
     current.progress.interpolate({

@@ -32,7 +32,9 @@ function NativeStackNavigator({
   screenLayout,
   UNSTABLE_getStateForRouteNamesChange,
   ...rest
-}: NativeStackNavigatorProps) {
+}: NativeStackNavigatorProps & {
+  renderHeader: (props: any) => React.ReactNode;
+}) {
   const { state, describe, descriptors, navigation, NavigationContent } =
     useNavigationBuilder<
       StackNavigationState<ParamListBase>,
